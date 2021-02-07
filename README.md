@@ -264,3 +264,60 @@ def login():
 - route()의 argument로 GET, POST 사용
 
 </details>
+
+## 2021.02.07
+
+### Static Files
+
+<details>
+
+<summary>Static Files</summary>
+
+- static file 사용 시 패키지 내부에 static 폴더 생성하고 static file들을 위치시켜 사용한다.
+
+```python
+url_for('static', filename='style.css')
+```
+
+</details>
+
+### Rendering Templates
+
+<details>
+
+<summary>Rendering Templates</summary>
+
+- Flask는 Jinja2 Template을 자동으로 설정한다. (<https://jinja.palletsprojects.com/en/2.11.x/>)
+
+- render_template()
+
+  - template rendering시 사용하는 method
+
+  - flask.render_template(template_name_or_list, **context)
+
+    - tamplate_name_or_list: 사용하려는 템플릿 이름
+
+    - context: template context에서 사용할 변수
+
+  - <https://flask.palletsprojects.com/en/1.1.x/api/#flask.render_template>
+
+  ```python
+  from flask import render_template
+
+  @app.route('/hello/')
+  @app.route('/hello/<name>')
+  def hello(name=None):
+      return render_template('hello.html', name=name)
+  ```
+
+  - flask는 templates 폴더에서 hello.html을 찾는다.
+
+  - hello.html template의 name 변수에 hello함수에서의 name 값 사용
+
+- get_flashed_messages()
+
+  - <https://flask.palletsprojects.com/en/1.1.x/api/#flask.get_flashed_messages>
+
+  - template안에서 request, session, g object 접근하여 사용 가능
+
+</details>
