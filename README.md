@@ -2,6 +2,12 @@
 
 > flask documentation을 따라 만든 flask tutorial
 
+- 영어: 
+<https://flask.palletsprojects.com/en/1.1.x/>
+
+- 한국어: 
+<https://flask-docs-kr.readthedocs.io/ko/latest/index.html>
+
 ## 2021.01.17
 
 ### flask 환경 설정
@@ -321,3 +327,125 @@ url_for('static', filename='style.css')
   - template안에서 request, session, g object 접근하여 사용 가능
 
 </details>
+
+## 2021.02.08
+
+### Accessing Request Data
+
+<details>
+
+<summary>Accessing Request Data</summary>
+
+- request 객체 - 전역객체
+
+</details>
+
+<details>
+
+<summary>Context Locals</summary>
+
+</details>
+
+<details>
+
+<summary>Request Objects</summary>
+
+```python
+from flask import request
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if valid_login(request.form['username'],
+                       request.form['password']):
+            return log_the_user_in(request.form['username'])
+        else:
+            error = 'Invalid username/password'
+    # the code below is executed if the request method
+    # was GET or the credentials were invalid
+    return render_template('login.html', error=error)
+```
+
+- method 속성으로 request method 접근 가능
+
+- form 속성으로 사용해서 data 사용
+
+- key가 존재하지 않는 data 접근 시 key error -> HTTP 400 (Bad Request) 발생
+
+```python
+searchword = request.args.get('key', '')
+```
+
+- args 속성을 통해서 url parameter에 접근 가능
+
+</details>
+
+<details>
+
+<summary>File Uploads</summary>
+
+- files attribute를 통해서 file data 접근 가능
+
+- upload된 각 파일들은 그 dictionary안에 저장되어 있다.
+
+- save() method를 이용해서 서버 시스템에 저장가능
+
+  - save(file_path)
+
+```python
+from flask import request
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['the_file']
+        f.save('/var/www/uploads/uploaded_file.txt')
+```
+
+- filenames attribute를 통해서 file 이름 접근
+
+```python
+from flask import request
+from werkzeug import secure_filename
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['the_file']
+        f.save('/var/www/uploads/' + secure_filename(f.filename))
+```
+
+</details>
+
+<summary>Cookies</summary>
+
+- cookies attribute를 통해서 cookies 접근
+
+- set_cookie(): response 객체의 cookie를 설정
+
+- read cookies
+
+```python
+from flask import request
+
+@app.route('/')
+def index():
+    username = request.cookies.get('username')
+    # use cookies.get(key) instead of cookies[key] to not get a
+    # KeyError if the cookie is missing.
+```
+
+- write cookies
+
+```python
+from flask import make_response
+
+@app.route('/')
+def index():
+    resp = make_response(render_template(...))
+    resp.set_cookie('username', 'the username')
+    return resp
+```
+
+</dertails>
