@@ -418,6 +418,8 @@ def upload_file():
 
 </details>
 
+<details>
+
 <summary>Cookies</summary>
 
 - cookies attribute를 통해서 cookies 접근
@@ -448,4 +450,130 @@ def index():
     return resp
 ```
 
-</dertails>
+</details>
+
+## 2021.02.10
+
+### Redirects and Errors
+
+<details>
+
+<summary>Redirects and Errors</summary>
+
+- redirect(): 다른 엔드포인트로 redirect
+
+- abort(): 에러코드와 함께 요청을 중단
+
+```python
+from flask import abort, redirect, url_for
+
+# root url로 접근시 /login으로 redirect
+@app.route('/')
+def index():
+    return redirect(url_for('login'))
+
+# /login 접근시 에러코드 401로 요청중단
+@app.route('/login')
+def login():
+    abort(401)
+    # this_is_never_executed()
+```
+
+- errorhandler(): errorhandler 데코레이터를 사용하여 에러페이지 변경
+
+```python
+from flask import render_template
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
+    # render_template 뒤의 404는 페이지의 상태코드가 404가 되어야한다는 것을 flask에 말해준다. 기본적으로 200으로 설정되어있다. (200, OK)
+```
+
+</details>
+
+### About Responses
+
+<details>
+
+<summary>About Responses</summary>
+
+- view function의 return value는 자동으로 response 객체로 변환된다.
+
+- return value가 string인 경우 200 OK 상태코드와 test/html mimtype
+
+
+```python
+@app.errorhandler(404)
+def not_found(error):
+    resp = make_response(render_template('error.html'), 404)
+    resp.headers['X-Something'] = 'A value'
+    return resp
+```
+
+</details>
+
+<details>
+
+<summary>APIs with JSON</summary>
+
+- response 포맷으로 JSON 형식을 사용
+
+```python
+def me_api():
+    user = get_current_user()
+    return {
+        "username": user.username,
+        "theme": user.theme,
+        "image": url_for("user_image", filename=user.image),
+    }
+```
+
+</details>
+
+### Session
+
+<details>
+
+<summary>Session</summary>
+
+- Session 객체
+
+  - Session 사용을 위해서는 비밀키 사용 필요
+
+  - 비밀키를 모르면 cookie를 조회만 가능. 변경은 불가능.
+
+```python
+from flask import Flask, session, redirect, url_for, escape, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    if 'username' in session:
+        return 'Logged in as %s' % escape(session['username'])
+    return 'You are not logged in'
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        return redirect(url_for('index'))
+    return '''
+        <form action="" method="post">
+            <p><input type=text name=username>
+            <p><input type=submit value=Login>
+        </form>
+    '''
+
+@app.route('/logout')
+def logout():
+    # remove the username from the session if it's there
+    session.pop('username', None)
+    return redirect(url_for('index'))
+
+# set the secret key.  keep this really secret:
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+```
+
+</details>
