@@ -616,7 +616,7 @@ app.logger.error('An error occurred')
 
 <details>
 
-<summary>Hooking in WSGI Middleware<summary>
+<summary>Hooking in WSGI Middleware</summary>
 
 ```python
 from werkzeug.middleware.proxy_fix import ProxyFix
