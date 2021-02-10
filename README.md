@@ -577,3 +577,50 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 ```
 
 </details>
+
+## 2021.02.11
+
+### Message Flashing
+
+<details>
+
+<summary>Message Flashing</summary>
+
+- flashing system은 request의 끝과 그 바로 다음 request에 접근할 떄 메시지를 기록할 수 있도록 한다.
+
+- flash(): 메세지를 flash
+
+- get_flashed_messages(): 메세지를 가져오기 위해서 템플릿에서 사용할 수 있는 메소드
+
+- <https://flask-docs-kr.readthedocs.io/ko/latest/patterns/flashing.html#message-flashing-pattern>
+
+</details>
+
+### Logging
+
+<details>
+
+<summary>Logging</summary>
+
+- logger를 사용해서 로그 출력
+
+```python
+app.logger.debug('A value for debugging')
+app.logger.warning('A warning occurred (%d apples)', 42)
+app.logger.error('An error occurred')
+```
+
+</details>
+
+### Hooking in WSGI Middleware
+
+<details>
+
+<summary>Hooking in WSGI Middleware<summary>
+
+```python
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app)
+```
+
+</details>
