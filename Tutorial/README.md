@@ -18,15 +18,21 @@
 
     - 이 프로젝트의 경우 ../venv/의 가상환경 사용한다.
 
-</deatils>
+</details>
 
 ### Application Setup
+
+<details>
+
+<summary>Application Setup</summary>
 
 - Flask application은 Flask class의 인스턴스로 설정과 URL등이 모두 클래스에 등록되어있다.
 
 - Flask 인스턴스를 글로벌하게 만드는 것은 프로젝트 규모가 커져가면서 문제를 야기할 수 있기 때문에 함수를 통해서 인스턴스를 생성할 것이다.
 
   - application factory
+
+</details>
 
 <details>
 
