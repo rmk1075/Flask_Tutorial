@@ -63,3 +63,90 @@ $ flask run
 ```
 
 </details>
+
+### Define and Access the Database
+
+<details>
+
+<summary>Define and Access the Database</summary>
+
+- 이 프로젝트에서는 SQLite DB를 사용한다.
+
+- 파이썬은 SQLite를 지원하는 모듈 sqlite3를 지원한다.
+
+- SQLite
+
+  - python built-in module
+
+  - 별도의 database server설정이 필요없어서 편하다.
+
+  - 동시접속에서 성능 문제 있을 수 있지만, 작은 프로젝트에서는 문제 없다.
+
+</details>
+
+<details>
+
+<summary>Connect to the Database</summary>
+
+- database connection 생성
+
+  - request에 의해서 connection 생성 후 response 반환 전에 close
+
+- flaskr/db.py
+
+  1) get_db(): g 객체에 접근해서 db 연결설정한다.
+
+  2) close_db(): g 객체에 db 연결 존재하는 경우 종료한다.
+
+</details>
+
+<details>
+
+<summary>Create the Tables</summary>
+
+- SQLite에서 데이터는 table과 columns에 저장된다.
+
+- Flaskr에서 사용자 정보는 user, 게시물은 post 테이블에 저장한다.
+
+- flaskr/schema.sql
+
+  - 테이블 생성
+
+- flaskr/db.py
+
+  1) init_db(): db 설정 초기화한다. db 연결 생성 및 테이블 생성.
+
+  2) init_db_command(): init-db 명령어 설정.
+
+</details>
+
+<details>
+
+<summary>Register with the Application</summary>
+
+- close_db(), init_db_command() 함수는 application 인스턴스에 등록되어야 한다.
+
+- flaskr/db.py
+
+  1) init_db(): close_db, init_db_command 함수 등록
+
+- flaskr/__init__.py
+
+  1) create_app() 함수 하단에 db.init_app() 호출 추가
+
+</details>
+
+<details>
+
+<summary>Initialize the Database File</summary>
+
+- init-db 명령어가 app에 등록되어서 flask run과 같이 사용가능
+
+```shell
+$ flask init-db
+Initialized the database.
+```
+
+- flaskr/instance dir 내부에 flask.sqlite 생성
+
+</details>
