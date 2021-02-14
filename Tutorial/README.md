@@ -150,3 +150,85 @@ Initialized the database.
 - flaskr/instance dir 내부에 flask.sqlite 생성
 
 </details>
+
+## 2021.02.14
+
+### Blueprints and Views
+
+<details>
+
+<summary>Blueprints and Views</summary>
+
+- view function: application으로 온 요청에 대한 응답을 위한 코드
+
+- request URL과 매칭하기 위해서 Flask는 pattern을 사용한다.
+
+</details>
+
+<details>
+
+<summary>Create a Blueprint</summary>
+
+- blueprint: 뷰와 관련된 코드들을 관리하는 방법
+
+  - 뷰와 코드들을 application에 직접 등록하는 것이 아니라 blueprint에 등록하고 해당 blueprint가 factory function에서 app에 등록된다.
+
+  - Flaskr's blueprint
+
+    1) authentication function
+
+    2) blog post function
+
+- flaskr/auth.py
+
+  1) Blueprint 객체 생성
+
+- flaskr/__init.py__
+
+  1) register_blueprint(): blueprint 객체 등록 - auth.bp
+
+</details>
+
+<details>
+
+<summary>The First View: Register</summary>
+
+- /auth/register에 접근 시 register 뷰 반환
+
+- flaskr/auth.py
+
+  1) register(): /auth/register URL 접근시에 사용자의 username, password를 입력받아 유효성 검사 후 등록한다.
+
+</details>
+
+<details>
+
+<summary>Login</summary>
+
+- flaskr/auth.py
+
+  1) login(): user 정보 확인하여서 로그인 하는 함수. 로그인 후 session에 user_id 등록.
+
+  2) load_logged_in_user(): app request에 대한 함수 실행전에 session을 확인하도록 하는 함수.
+
+  3) logout(): session 정보 삭제하여서 로그아웃 처리.
+
+</details>
+
+<details>
+
+<summary>Require Authentication in Other Views</summary>
+
+- flaskr/auth.py
+
+  1) login_require(): blog post 시에 사용자의 로그인 유무를 확인하는 함수.
+
+</details>
+
+<details>
+
+<summary>Endpoints and URLs</summary>
+
+- endpoint: view와 연결된 이름, URL로 view와 연결되는 이름.
+
+</details>
