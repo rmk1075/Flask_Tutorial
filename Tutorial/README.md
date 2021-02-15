@@ -232,3 +232,67 @@ Initialized the database.
 - endpoint: view와 연결된 이름, URL로 view와 연결되는 이름.
 
 </details>
+
+## 2021.02.15
+
+### Templates
+
+<details>
+
+<summary>Templates</summary>
+
+- template file들은 flaskr 패키지 내부에 templates 디렉터리에 저장된다.
+
+- template
+
+  - statis data와 dynamic data를 위한 placeholder 등을 포함
+
+- Jinja template
+
+  - Flask는 Jinja template library  사용
+
+  - Flask에서 Jinja template은 autoescape로 설정되어서 안전하다.
+
+  - {{ .. }}: output to the final document
+
+  - {% .. %}: control flow (if, for)
+
+</details>
+
+<details>
+
+<summary>The Base Layout</summary>
+
+- app의 각 화면은 각각의 HTML 구조 템플릿을 짜지않고, basic layout을 기반으로 확장하고 오버라이딩해서 사용한다.
+
+- flaskr/templates/base.html
+
+</details>
+
+<details>
+
+<summary>Register</summary>
+
+- flaskr/templates/auth/register.html
+
+</details>
+
+<details>
+
+<summary>Log In</summary>
+
+- flaskr/templates/auth/login.html
+
+</details>
+
+<details>
+
+<summary>Register A User</summary>
+
+- <http://127.0.0.1:5000/auth/register> 과 <http://127.0.0.1:5000/auth/login> 접속
+
+- form 입력하지 않고 register, login 버튼 클릭 시, 에러메시지 출력
+
+  - flash()로 생성한 에러메시지 반환
+
+</details>
