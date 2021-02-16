@@ -58,4 +58,17 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
 
+    '''
+    6. blog blueprint 등록
+    '''
+    from . import blog
+    app.register_blueprint(blog.bp)
+
+    '''
+    7. app.add_url_rule()
+    - url_for('blog.index')와 url_for('index') 모두 동작
+    - 둘다 '/' URL 생성
+    '''
+    app.add_url_rule('/', endpoint='index')
+
     return app

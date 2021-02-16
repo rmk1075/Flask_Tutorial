@@ -145,6 +145,7 @@ def logout():
 def login_required(view):
     '''
     14. functools.wraps()
+    - decorator 생성하는 decorator
     '''
     @functools.wraps(view)
     def wrapped_view(**kwargs):

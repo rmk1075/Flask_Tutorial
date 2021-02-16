@@ -296,3 +296,111 @@ Initialized the database.
   - flash()로 생성한 에러메시지 반환
 
 </details>
+
+## 2021.02.16
+
+### Static Files
+
+<details>
+
+<summary>Static Files</summary>
+
+- Flask는 flaskr/static 디렉토리 아래의 상대주소를 통해서 자동으로 static view들을 사용한다.
+
+- base.html
+
+```python
+{{ url_for('static', filename='style.css') }}
+```
+
+- flaskr/static/style.css
+
+</details>
+
+### Blog Blueprint
+
+<details>
+
+<summary>Blog Blueprint</summary>
+
+- blog
+
+  - 모든 게시물 조회
+
+  - 로그인한 사용자의 게시물 등록
+
+  - 게시물 저자의 게시물 편집, 삭제
+
+</details>
+
+<details>
+
+<summary>The Blueprint</summary>
+
+- flaskr/blog.py
+
+  1) Blueprint() 객체 생성
+
+- flaskr/__init__.py
+
+  1) blog blueprint, url rule 등록
+
+</details>
+
+<details>
+
+<summary>Index</summary>
+
+- 모든 게시물을 최신순으로 조회하는 화면
+
+- flaskr/blog.py
+
+  - index(): 게시물과 저자의 정보를 출력하는 화면
+
+- flaskr/templates/blog/index.html
+
+</details>
+
+<details>
+
+<summary>Create</summary>
+
+- create view는 register view와 동일하게 동작한다.
+
+- flaskr/blog.py
+
+  1) create: 로그인한 사용자에 대해서 새로운 게시물 등록할 수 있도록 하는 함수
+
+- flaskr/templates/blog/create.html
+
+</details>
+
+<details>
+
+<summary>Update</summary>
+
+- update와 delete는 게시물을 조회하여 사용자와 작성자 일치 여부의 확인이 필요하다.
+
+- flaskr/blog.py
+
+  1) get_post(): 게시물을 조회하여 존재여부, 작성자와 사용자 일치 여부를 확인하여 결과를 반환한다.
+
+  2) update(): 게시물의 id를 입력받아서 해당 게시물을 update한다.
+
+- flaskr/templates/blog/update.html
+
+</details>
+
+<details>
+
+<summary>Delete</summary>
+
+- delete view는 template 따로 존재하지 않는다.
+
+- delete 버튼은 update 화면에 존재하고, 클릭 시 '/<id>/delete' URL로 접근.
+
+- flaskr/blog.py
+
+  1) delete(): 게시물 삭제 후 index 화면으로 이동
+
+</deatails>
