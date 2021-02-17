@@ -403,4 +403,126 @@ Initialized the database.
 
   1) delete(): 게시물 삭제 후 index 화면으로 이동
 
-</deatails>
+</details>
+
+## 2021.02.17
+
+### Make the Project Installable
+
+<details>
+
+<summary>Make the Project Installable</summary>
+
+- project 배포가능하도록 설정.
+
+- 다른 환경에서 해당 프로젝트를 설치하여서 동일하게 동작하도록 설정한다.
+
+</details>
+
+<details>
+
+<summary>Describe thr Project</summary>
+
+- setup.py
+
+  1) 프로젝트, 파일 설명
+
+- MANIFEST.in
+
+  1) static files, templates, sql 등등 프로젝트 파일들을 설명한 파일
+
+</details>
+
+<details>
+
+<summary>Install the Project</summary>
+
+```shell
+pip install -e
+```
+
+- pip가 setup.py 파일을 찾아서 해당 프로젝트를 editable 모드로 설치한다.
+
+- pip list 명령어로 확인가능
+
+- Tutorial directory가 아니어도 flask run 으로 실행가능
+
+</details>
+
+### Test Coverage
+
+<details>
+
+<summary>Test Coverage</summary>
+
+- application unit code 작성
+
+- pytest, coverage 설치
+
+```shell
+pip install pytest coverage
+```
+
+</details>
+
+<details>
+
+<summary>Setup and Fixtures</summary>ß
+
+- test 코드들은 tests 디렉토리 아래에 위치한다.
+
+  - tests 디렉토리는 package 디렉토리 내부가 아닌 동일 디렉토리에 위치한다.
+
+- tests/conftest.py
+
+  - fixtures: setup function
+
+- 파이썬 모듈 내부의 모든 테스트, 테스트 함수들은 'test_'로 시작한다.
+
+- tests/data.sql
+
+  - test에서 사용할 데이터들을 삽입하는 sql
+
+</details>
+
+<details>
+
+<summary>Factory</summary>
+
+- tests/test_factory.py
+
+</details>
+
+<details>
+
+<summary>Database</summary>
+
+- tests/test_db.py
+
+</details>
+
+<details>
+
+<summary>Authentication</summary>
+
+- tests/conftest.py
+
+- tests/test_auth.py
+
+</details>
+
+<details>
+
+<summary>Blog</summary>
+
+- tests/test_blog.py
+
+</details>
+
+<details>
+
+<summary>Running the Tests</summary>
+
+- setup.cfg
+
+</details>
