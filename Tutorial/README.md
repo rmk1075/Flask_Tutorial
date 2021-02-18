@@ -526,3 +526,89 @@ pip install pytest coverage
 - setup.cfg
 
 </details>
+
+## 2021.02.18
+
+### Deploy to Production
+
+<details>
+
+<summary>Build and Install</summary>
+
+- wheel format - Python distribution
+
+- dist 디렉토리 안에 whl파일 생성
+
+```shell
+$ pip install wheel
+$ python setup.py bdist_wheel
+$ pip install flaskr-1.0.0-py3-none-any.whl
+# {project name}-{version}-{python tag} -{abi tag}-{platform tag}
+
+# 새로운 환경의 경우 init 실행
+$ export FLASK_APP=flaskr
+$ flask init-db
+```
+
+- Tutorial_deploy 디렉토리에 배포
+
+</details>
+
+<details>
+
+<summary>Configure the Secret Key</summary>
+
+- secret key 생성
+
+```shell
+$ python -c 'import os; print(os.urandom(16))'
+```
+
+- venv/var/flaskr-instance/config.py 파일 설정
+
+```python
+SECRET_KEY = {생성된 KEY}
+```
+
+</details>
+
+<details>
+
+<summary>Run with a Production Server</summary>
+
+- Waitress: production WSGI server
+
+```shell
+$ pip install waitress
+$ waitress-serve --call 'flaskr:create_app'
+```
+
+</details>
+
+### Keep Developing
+
+<details>
+
+<summary>Keep Developing!</summary>
+
+- developing ideas
+
+  - A detail view to show a single post. Click a post’s title to go to its page.
+
+  - Like / unlike a post.
+
+  - Comments.
+
+  - Tags. Clicking a tag shows all the posts with that tag.
+
+  - A search box that filters the index page by name.
+
+  - Paged display. Only show 5 posts per page.
+
+  - Upload an image to go along with a post.
+
+  - Format posts using Markdown.
+
+  - An RSS feed of new posts.
+
+</details>
