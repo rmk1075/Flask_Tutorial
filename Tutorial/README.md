@@ -467,7 +467,7 @@ pip install pytest coverage
 
 <details>
 
-<summary>Setup and Fixtures</summary>ß
+<summary>Setup and Fixtures</summary>
 
 - test 코드들은 tests 디렉토리 아래에 위치한다.
 
